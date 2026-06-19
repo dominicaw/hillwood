@@ -1,7 +1,4 @@
 ---
-import sunIcon from "../assets/sun.svg";
-import moonIcon from "../assets/moon.svg";
-
 const navItems = [
 	{ label: "Home", href: "#home" },
 	{ label: "Rules", href: "#rules" },
@@ -12,86 +9,29 @@ const navItems = [
 <header class="header" id="site-header">
 	<div class="header-inner">
 		<a class="logo" href="#home">Hillwood</a>
-		<div class="header-actions">
-			<nav aria-label="Main navigation">
-				<ul class="nav-list">
-					{
-						navItems.map((item) => (
-							<li>
-								<a href={item.href}>{item.label}</a>
-							</li>
-						))
-					}
-				</ul>
-			</nav>
-			<button
-				type="button"
-				class="theme-toggle"
-				id="theme-toggle"
-				aria-label="Switch to dark mode"
-			>
-				<img
-					class="theme-toggle-icon theme-toggle-icon--sun"
-					src={sunIcon.src}
-					width="20"
-					height="20"
-					alt=""
-				/>
-				<img
-					class="theme-toggle-icon theme-toggle-icon--moon"
-					src={moonIcon.src}
-					width="20"
-					height="20"
-					alt=""
-				/>
-			</button>
-		</div>
+		<nav aria-label="Main navigation">
+			<ul class="nav-list">
+				{
+					navItems.map((item) => (
+						<li>
+							<a href={item.href}>{item.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
 	</div>
 </header>
 
 <script>
-	import {
-		THEME_STORAGE_KEY,
-		getCurrentTheme,
-		setTheme as persistTheme,
-	} from "../scripts/theme";
-
 	const header = document.getElementById("site-header");
-	const themeToggle = document.getElementById("theme-toggle");
-
-	const updateThemeToggleLabel = () => {
-		if (!themeToggle) return;
-		const isDark = getCurrentTheme() === "dark";
-		themeToggle.setAttribute(
-			"aria-label",
-			isDark ? "Switch to light mode" : "Switch to dark mode",
-		);
-	};
-
-	const setTheme = (theme: "light" | "dark", persist = true) => {
-		persistTheme(theme, persist);
-		updateThemeToggleLabel();
-	};
 
 	const updateHeader = () => {
 		header?.classList.toggle("header--scrolled", window.scrollY > 0);
 	};
 
-	updateThemeToggleLabel();
 	updateHeader();
 	window.addEventListener("scroll", updateHeader, { passive: true });
-
-	themeToggle?.addEventListener("click", () => {
-		setTheme(getCurrentTheme() === "dark" ? "light" : "dark");
-	});
-
-	window
-		.matchMedia("(prefers-color-scheme: dark)")
-		.addEventListener("change", (event) => {
-			if (!localStorage.getItem(THEME_STORAGE_KEY)) {
-				setTheme(event.matches ? "dark" : "light", false);
-			}
-		});
 </script>
 
 <style>
@@ -131,57 +71,6 @@ const navItems = [
 
 	.logo:hover {
 		color: var(--color-accent);
-	}
-
-	.header-actions {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.theme-toggle {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.25rem;
-		height: 2.25rem;
-		padding: 0;
-		border: 1px solid var(--color-border);
-		border-radius: 50%;
-		background: var(--color-surface);
-		cursor: pointer;
-		transition:
-			border-color 0.15s ease,
-			background-color 0.15s ease;
-	}
-
-	.theme-toggle:hover,
-	.theme-toggle:focus-visible {
-		border-color: var(--color-accent);
-		outline: none;
-	}
-
-	.theme-toggle-icon {
-		position: absolute;
-		opacity: 1;
-		transition: opacity 0.35s ease;
-	}
-
-	.theme-toggle-icon--sun {
-		opacity: 0;
-	}
-
-	:global([data-theme='dark']) .theme-toggle-icon--sun {
-		opacity: 1;
-	}
-
-	:global([data-theme='dark']) .theme-toggle-icon--moon {
-		opacity: 0;
-	}
-
-	:global([data-theme='dark']) .theme-toggle-icon {
-		filter: invert(1);
 	}
 
 	.nav-list {

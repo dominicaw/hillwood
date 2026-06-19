@@ -1,6 +1,4 @@
-:root,
-[data-theme='light'] {
-  color-scheme: light;
+:root {
   --color-bg: #ffffff;
   --color-surface: #ffffff;
   --color-text: #2c2a26;
@@ -21,45 +19,6 @@
   );
   --section-shadow:
     0 2px 8px rgba(44, 42, 38, 0.06), 0 8px 24px rgba(44, 42, 38, 0.05);
-}
-
-[data-theme='dark'] {
-  color-scheme: dark;
-  --color-bg: #1a1917;
-  --color-surface: #242320;
-  --color-text: #e8e6e1;
-  --color-text-muted: #a8a49c;
-  --color-accent: #7aab88;
-  --color-accent-hover: #8fbf9b;
-  --color-accent-light: #2a3d30;
-  --color-border: #3d3a35;
-  --color-hover-surface: rgba(122, 171, 136, 0.12);
-  --section-surface: linear-gradient(
-    to bottom,
-    rgba(36, 35, 32, 1) 0%,
-    rgba(36, 35, 32, 0.85) 100%
-  );
-  --section-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 0.35s;
-    animation-timing-function: ease;
-  }
-
-  html.theme-transition,
-  html.theme-transition *,
-  html.theme-transition *::before,
-  html.theme-transition *::after {
-    transition:
-      background-color 0.35s ease,
-      color 0.35s ease,
-      border-color 0.35s ease,
-      box-shadow 0.35s ease !important;
-  }
 }
 
 *,

@@ -9,7 +9,7 @@ export const faqs: FAQ[] = [
     id: 'internet',
     question: 'Who is the internet service provider?',
     answer:
-      'Frogfoot is the internet network operator for Hillwood. You can choose any internet service provider you like (Mweb, Afrihost, etc).',
+      'Frogfoot is the fibre network operator for Hillwood. You can choose any internet service provider you like (Mweb, Afrihost, etc).',
   },
   {
     id: 'refuse',

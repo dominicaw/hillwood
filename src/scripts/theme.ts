@@ -1,4 +1,5 @@
 export const THEME_STORAGE_KEY = "theme";
+export const THEME_TRANSITION_MS = 350;
 
 export type Theme = "light" | "dark";
 
@@ -16,9 +17,29 @@ export function applyTheme(theme: Theme): void {
 	document.documentElement.setAttribute("data-theme", theme);
 }
 
+function runThemeTransition(update: () => void): void {
+	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+		update();
+		return;
+	}
+
+	if (document.startViewTransition) {
+		document.startViewTransition(update);
+		return;
+	}
+
+	document.documentElement.classList.add("theme-transition");
+	update();
+	window.setTimeout(() => {
+		document.documentElement.classList.remove("theme-transition");
+	}, THEME_TRANSITION_MS);
+}
+
 export function setTheme(theme: Theme, persist = true): void {
-	applyTheme(theme);
-	if (persist) localStorage.setItem(THEME_STORAGE_KEY, theme);
+	runThemeTransition(() => {
+		applyTheme(theme);
+		if (persist) localStorage.setItem(THEME_STORAGE_KEY, theme);
+	});
 }
 
 export function initTheme(): void {

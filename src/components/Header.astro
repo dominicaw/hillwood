@@ -140,6 +140,7 @@ const navItems = [
 	}
 
 	.theme-toggle {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -162,19 +163,21 @@ const navItems = [
 	}
 
 	.theme-toggle-icon {
-		display: block;
+		position: absolute;
+		opacity: 1;
+		transition: opacity 0.35s ease;
 	}
 
 	.theme-toggle-icon--sun {
-		display: none;
+		opacity: 0;
 	}
 
 	:global([data-theme='dark']) .theme-toggle-icon--sun {
-		display: block;
+		opacity: 1;
 	}
 
 	:global([data-theme='dark']) .theme-toggle-icon--moon {
-		display: none;
+		opacity: 0;
 	}
 
 	:global([data-theme='dark']) .theme-toggle-icon {

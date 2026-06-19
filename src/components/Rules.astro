@@ -9,38 +9,37 @@ import { ruleSections, rulesMeta } from "../data/rules";
 		<p class="rules-meta">{rulesMeta.subtitle}</p>
 		<p class="rules-issued">Issued {rulesMeta.issued}</p>
 
-		<nav class="rules-nav" aria-label="Rules sections">
-			<ul>
-				{
-					ruleSections.map((section) => (
-						<li>
-							<a href={`#rule-${section.id}`}>
-								{section.number}. {section.title}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
+		<button type="button" class="rules-download" id="download-rules-pdf">
+			Download as PDF
+		</button>
 
-		<div class="rules-content">
+		<div class="rules-list">
 			{
 				ruleSections.map((section) => (
-					<article id={`rule-${section.id}`} class="rule-section">
-						<h3>
-							<span class="rule-number">{section.number}.</span> {section.title}
-						</h3>
-						<ol>
-							{section.items.map((item) => (
-								<li>{item}</li>
-							))}
-						</ol>
-					</article>
+					<details id={`rule-${section.id}`} class="rule-item">
+						<summary>
+							<span class="rule-number">{section.number}.</span>
+							{section.title}
+						</summary>
+						<div class="rule-content">
+							<ol>
+								{section.items.map((item) => (
+									<li>{item}</li>
+								))}
+							</ol>
+						</div>
+					</details>
 				))
 			}
 		</div>
 	</div>
 </section>
+
+<script>
+	import { downloadRulesPdf } from "../scripts/downloadRulesPdf";
+
+	document.getElementById("download-rules-pdf")?.addEventListener("click", downloadRulesPdf);
+</script>
 
 <style>
 	.rules {
@@ -58,57 +57,84 @@ import { ruleSections, rulesMeta } from "../data/rules";
 	.rules-issued {
 		color: var(--color-text-muted);
 		font-size: 0.875rem;
-		margin-bottom: 2.5rem;
+		margin-bottom: 1.25rem;
 	}
 
-	.rules-nav {
-		margin-bottom: 3rem;
-		padding: 1.25rem 1.5rem;
-		background: var(--color-accent-light);
-		border-radius: 6px;
+	.rules-download {
+		display: inline-block;
+		margin-bottom: 2rem;
+		padding: 0.75rem 1.5rem;
+		font-family: inherit;
+		font-weight: 600;
+		font-size: 0.9375rem;
+		color: #fff;
+		background: var(--color-accent);
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: background 0.15s ease;
+	}
+
+	.rules-download:hover,
+	.rules-download:focus-visible {
+		background: #2e4534;
+	}
+
+	.rules-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.rule-item {
 		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		overflow: hidden;
+		scroll-margin-top: calc(var(--header-height) + 1rem);
 	}
 
-	.rules-nav ul {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-		gap: 0.5rem 1.5rem;
-		margin: 0;
-		padding: 0;
+	.rule-item summary {
+		padding: 1rem 1.25rem;
+		font-weight: 600;
+		cursor: pointer;
 		list-style: none;
 	}
 
-	.rules-nav a {
-		font-size: 0.875rem;
-		text-decoration: none;
+	.rule-item summary::-webkit-details-marker {
+		display: none;
 	}
 
-	.rules-nav a:hover,
-	.rules-nav a:focus-visible {
-		text-decoration: underline;
+	.rule-item summary::after {
+		content: "+";
+		float: right;
+		font-weight: 400;
+		color: var(--color-accent);
 	}
 
-	.rules-content {
-		display: flex;
-		flex-direction: column;
-		gap: 2.5rem;
+	.rule-item[open] summary::after {
+		content: "−";
 	}
 
-	.rule-section {
-		scroll-margin-top: calc(var(--header-height) + 1rem);
+	.rule-item summary:hover {
+		background: var(--color-accent-light);
 	}
 
 	.rule-number {
 		color: var(--color-text-muted);
-		font-weight: 600;
+		margin-right: 0.25rem;
 	}
 
-	.rule-section ol {
-		margin: 0;
+	.rule-content {
+		padding: 0 1.25rem 1.25rem;
+		border-top: 1px solid var(--color-border);
+	}
+
+	.rule-content ol {
+		margin: 1rem 0 0;
 		padding-left: 1.25rem;
 	}
 
-	.rule-section li {
+	.rule-content li {
 		color: var(--color-text);
 	}
 </style>

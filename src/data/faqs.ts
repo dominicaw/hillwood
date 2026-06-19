@@ -12,7 +12,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: 'internet',
-    question: 'Who is the internet provider?',
+    question: 'Who is the internet service provider?',
     answer: 'Add your answer here.',
   },
   {
@@ -23,16 +23,6 @@ export const faqs: FAQ[] = [
   {
     id: 'levies',
     question: 'How and when are levies paid?',
-    answer: 'Add your answer here.',
-  },
-  {
-    id: 'pets',
-    question: 'How do I apply to keep a pet?',
-    answer: 'Add your answer here.',
-  },
-  {
-    id: 'repairs',
-    question: 'Who do I contact for maintenance or repairs?',
     answer: 'Add your answer here.',
   },
   {

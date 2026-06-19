@@ -1,12 +1,24 @@
+---
+import hillwoodGif from "../assets/hillwood-transparent.gif";
+---
+
 <section id="home" class="hero">
 	<div class="section-inner">
-		<h1>Hillwood</h1>
-		<p class="section-label">Heathfield, Cape Town</p>
-		<p class="hero-tagline">
-			Welcome to the Hillwood Body Corporate website. Here you will find the conduct rules
-			for residents and owners, along with answers to common questions.
-		</p>
-		<a class="hero-cta" href="#rules">View conduct rules</a>
+		<div class="hero-content">
+			<h1 class="hero-title">Hillwood</h1>
+			<p class="section-label">58 Galway Road, Heathfield, Cape Town</p>
+			<p class="hero-tagline">
+				Established in 1989, Hillwood is a friendly community in the heart of Heathfield, Cape Town.
+			</p>
+		</div>
+		<img
+			class="hero-art"
+			src={hillwoodGif.src}
+			alt=""
+			width={400}
+			height={256}
+			aria-hidden="true"
+		/>
 	</div>
 </section>
 
@@ -15,11 +27,47 @@
 		padding-top: 1rem;
 	}
 
+	.hero .section-inner {
+		position: relative;
+		background-color: #bfd2dd;
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-art {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 200px;
+		height: auto;
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+		pointer-events: none;
+	}
+
+	.hero-title {
+		margin: 0rem;
+	}
+
 	.hero-tagline {
-		/* max-width: 36rem; */
-		font-size: 1.125rem;
+		max-width: 30rem;
 		color: var(--color-text-muted);
 		margin-bottom: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.hero-tagline {
+			max-width: 20rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-tagline {
+			max-width: 10rem;
+		}
 	}
 
 	.hero-cta {

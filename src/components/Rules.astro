@@ -1,0 +1,114 @@
+---
+import { ruleSections, rulesMeta } from "../data/rules";
+---
+
+<section id="rules" class="rules">
+	<div class="section-inner">
+		<p class="section-label">Body Corporate</p>
+		<h2>{rulesMeta.title}</h2>
+		<p class="rules-meta">{rulesMeta.subtitle}</p>
+		<p class="rules-issued">Issued {rulesMeta.issued}</p>
+
+		<nav class="rules-nav" aria-label="Rules sections">
+			<ul>
+				{
+					ruleSections.map((section) => (
+						<li>
+							<a href={`#rule-${section.id}`}>
+								{section.number}. {section.title}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="rules-content">
+			{
+				ruleSections.map((section) => (
+					<article id={`rule-${section.id}`} class="rule-section">
+						<h3>
+							<span class="rule-number">{section.number}.</span> {section.title}
+						</h3>
+						<ol>
+							{section.items.map((item) => (
+								<li>{item}</li>
+							))}
+						</ol>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.rules {
+		padding: 4rem 1.5rem;
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.rules-meta {
+		color: var(--color-text-muted);
+		font-size: 0.9375rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.rules-issued {
+		color: var(--color-text-muted);
+		font-size: 0.875rem;
+		margin-bottom: 2.5rem;
+	}
+
+	.rules-nav {
+		margin-bottom: 3rem;
+		padding: 1.25rem 1.5rem;
+		background: var(--color-accent-light);
+		border-radius: 6px;
+		border: 1px solid var(--color-border);
+	}
+
+	.rules-nav ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+		gap: 0.5rem 1.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.rules-nav a {
+		font-size: 0.875rem;
+		text-decoration: none;
+	}
+
+	.rules-nav a:hover,
+	.rules-nav a:focus-visible {
+		text-decoration: underline;
+	}
+
+	.rules-content {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.rule-section {
+		scroll-margin-top: calc(var(--header-height) + 1rem);
+	}
+
+	.rule-number {
+		color: var(--color-text-muted);
+		font-weight: 600;
+	}
+
+	.rule-section ol {
+		margin: 0;
+		padding-left: 1.25rem;
+	}
+
+	.rule-section li {
+		color: var(--color-text);
+	}
+</style>

@@ -1,0 +1,94 @@
+:root {
+	--color-bg: #f7f5f0;
+	--color-surface: #ffffff;
+	--color-text: #2c2a26;
+	--color-text-muted: #5c574f;
+	--color-accent: #3d5a45;
+	--color-accent-light: #e8efe9;
+	--color-border: #ddd8ce;
+	--color-header-bg: rgba(247, 245, 240, 0.92);
+	--font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+	--font-serif: Georgia, "Times New Roman", serif;
+	--max-width: 720px;
+	--header-height: 4rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: var(--header-height);
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-sans);
+	font-size: 1rem;
+	line-height: 1.65;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	font-weight: 600;
+}
+
+h1 {
+	font-family: var(--font-serif);
+	font-size: clamp(2rem, 5vw, 2.75rem);
+}
+
+h2 {
+	font-size: clamp(1.5rem, 3vw, 1.875rem);
+	margin-top: 0;
+}
+
+h3 {
+	font-size: 1.125rem;
+	margin: 0 0 0.75rem;
+	color: var(--color-accent);
+}
+
+p {
+	margin: 0 0 1rem;
+}
+
+a {
+	color: var(--color-accent);
+}
+
+ul,
+ol {
+	margin: 0 0 1rem;
+	padding-left: 1.25rem;
+}
+
+li + li {
+	margin-top: 0.35rem;
+}
+
+main {
+	display: block;
+}
+
+.section-inner {
+	max-width: var(--max-width);
+	margin: 0 auto;
+}
+
+.section-label {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--color-accent);
+	margin-bottom: 0.5rem;
+}

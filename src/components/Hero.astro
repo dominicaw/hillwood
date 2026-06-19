@@ -1,5 +1,6 @@
 ---
 import hillwoodGif from "../assets/hillwood-transparent.gif";
+import groundSvg from "../assets/ground.svg";
 ---
 
 <section id="home" class="hero">
@@ -11,6 +12,11 @@ import hillwoodGif from "../assets/hillwood-transparent.gif";
 				Established in 1989, Hillwood is a friendly community in the heart of Heathfield, Cape Town.
 			</p>
 		</div>
+		<div
+			class="hero-ground"
+			style={`background-image: url(${groundSvg.src})`}
+			aria-hidden="true"
+		></div>
 		<img
 			class="hero-art"
 			src={hillwoodGif.src}
@@ -29,6 +35,7 @@ import hillwoodGif from "../assets/hillwood-transparent.gif";
 
 	.hero .section-inner {
 		position: relative;
+		overflow: hidden;
 		background-color: #bfd2dd;
 	}
 
@@ -37,10 +44,26 @@ import hillwoodGif from "../assets/hillwood-transparent.gif";
 		z-index: 1;
 	}
 
+	.hero-ground {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 0;
+		height: 30px;
+		background-repeat: repeat-x;
+		background-position: left bottom;
+		background-size: auto 35%;
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+		pointer-events: none;
+	}
+
 	.hero-art {
 		position: absolute;
 		right: 0;
 		bottom: 0;
+		z-index: 1;
 		width: 200px;
 		height: auto;
 		image-rendering: pixelated;
